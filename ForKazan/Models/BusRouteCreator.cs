@@ -50,7 +50,17 @@ namespace ForKazan.Models
             while (!InputDate.Day.Equals(DateTime.Now.Day))
             {
                 string fileName = CreateFileNameOfDateTime(InputDate);
-                ftpDataReader.GetFtpNativeBusesPoint(fileName);
+                var data = ftpDataReader.GetFtpNativeBusesPoint(fileName)
+                                        .BusPositionsPoints;
+                var firstInData = data.FirstOrDefault();
+                if(!busRoutes.Select(s=>s.NumberBusRoute).Contains(firstInData.Marsh))
+                {
+                    var buffer = 
+                }
+                foreach (var item in data)
+                {
+                    
+                }
                 InputDate = InputDate.AddMinutes(1);
             }
             return busRoutes;
