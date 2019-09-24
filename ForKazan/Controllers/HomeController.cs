@@ -11,8 +11,8 @@ namespace ForKazan.Controllers
     {
         public ActionResult Index()
         {
-            var bc = new BusRouteCreator();
-            bc.CreateBusRoutes();
+            var ftpR = new FtpDataReader("ftp://192.168.10.10//bus1","ftpuser", "Ln8#{T7nRsmd");
+            var baseRoutes = ftpR.CreateBusRoutes();
             return View();
         }
 

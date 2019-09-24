@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ForKazan.Models
 {
-    public class BusPositionPoint
+    public class CurrentBusPoint
     {
         public string GaragNumb { get; set; }
         public string Marsh { get; set; }
@@ -17,7 +17,7 @@ namespace ForKazan.Models
         public string Speed { get; set; }
         public string Azimuth { get; set; }
 
-        public BusPositionPoint(string garagNum, string marsh, string graph, string smena, string timenav, string latitude, string longitude, string speed, string azimuth)
+        public CurrentBusPoint(string garagNum, string marsh, string graph, string smena, string timenav, string latitude, string longitude, string speed, string azimuth)
         {
             GaragNumb = garagNum;
             Marsh = marsh;
