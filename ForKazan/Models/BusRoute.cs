@@ -9,12 +9,20 @@ namespace ForKazan.Models
     {
         public string NumberBusRoute { get; set; }        
         public List<BusStop> BusStops {get;set;}        
-        public List<IntermediatePointsForBuilding> IntermediatePointsForBuildings { get; set; }
+        public List<IntermediatePointsForBuilding> IntermediatePointsForBuilding { get; set; }
 
-        public BusRoute()
+        public BusRoute(string numberBusRoute, List<BusPositionPoint> busPositionPoints)
         {
             BusStops = new List<BusStop>();
-            IntermediatePointsForBuildings = new List<IntermediatePointsForBuilding>();
+            NumberBusRoute = numberBusRoute;
+            IntermediatePointsForBuilding = InitPointsForBuilding(busPositionPoints).ToList();
         }
+
+        private IEnumerable<IntermediatePointsForBuilding> InitPointsForBuilding(List<BusPositionPoint> busPositionPoints)
+        {
+            return busPositionPoints.Select(a => new Models.IntermediatePointsForBuilding(a.TimeNav, a.Latitude, a.Longitude, a.Speed));
+        }
+
+
     }
 }
