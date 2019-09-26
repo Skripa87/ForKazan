@@ -8,7 +8,7 @@ using ClosedXML.Excel;
 using System.IO;
 
 namespace ForKazan.Controllers
-{
+{  
     public class HomeController : Controller
     {
         public ActionResult Index()
