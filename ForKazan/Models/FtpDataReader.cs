@@ -21,7 +21,6 @@ namespace ForKazan.Models
             var request = new WebClient();
             string url = FtpPath + fileName;
             request.Credentials = new NetworkCredential(UserName, Password);
-
             try
             {
                 byte[] newFileData = request.DownloadData(url);
@@ -97,37 +96,6 @@ namespace ForKazan.Models
                 busRoutes.Add(busRoute);
                 currentBusPoints.RemoveAll(c => numberBusRoute.Equals(c.Marsh));
             }
-            /*try
-            {
-                var start = Document.GetElementsByTagName("time")[0];
-                string startperiod = "", endperiod = "";
-                foreach (XmlAttribute attr in ((XmlNode)start).Attributes)
-                {
-                    switch (attr.Name)
-                    {
-                        case "ot": startperiod = attr.Value; break;
-                        case "do": endperiod = attr.Value; break;                        
-                    }
-                }
-                if (DateTime.TryParse(startperiod, out var startPeriod))
-                    navigationDataOnPeriod.StartPeriod = startPeriod;
-                if (DateTime.TryParse(endperiod, out var endPeriod))
-                    navigationDataOnPeriod.EndPeriod = endPeriod;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            try
-            {
-                var samplesize = ((XmlAttribute)(((XmlNode)Document.GetElementsByTagName("Stat")[0]).Attributes[0])).Value;
-                if (int.TryParse(samplesize, out int count))
-                    navigationDataOnPeriod.SampleSize = count;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }*/
             return busRoutes;
         }
 
