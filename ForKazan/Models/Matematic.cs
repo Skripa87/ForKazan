@@ -22,24 +22,47 @@ namespace ForKazan.Models
                 var listY = busRoute.IntermediatePointsForBuilding
                                     .Select(s => s.Longitude);
                 var matrixA = new List<List<double>>();
-                var listB = new List<double>();
-                int i = 0, j = 0;
-                for (i = 0; i < 5; i++)
-                    for (j = 0; j < 5; j++)
+                for (int i = 0; i < 5; i++)
+                {
+                    var buff = new List<double>();
+                    for (int j = 0; j < 5; j++)
                     {
-                        if (i > 0 && j < 4)
+                        buff.Add(0);
+                    }
+                    matrixA.Add(buff);
+                }
+                var listB = new List<double>();
+                for (int i = 0; i < 5; i++)
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (i == 0 && j == 0)
                         {
-                            matrixA[i][j] = matrixA[i][j + 1];
+                            matrixA[i][j] = countX + 1;
                         }
+                        else if (i == 0)
+                        {
+                            matrixA[i][j] = listX.Sum(x => Math.Pow(x, j + i));
+                        }
+                        if (i > 0 && j < 5 - i)
+                        {
+                            matrixA[i][j] = matrixA[i - 1][j + 1];
+                        }
+                        else
+                        {
+                            matrixA[i][j] = listX.Sum(x => Math.Pow(x, j + i));
+                        }
+                    }
+                foreach (var item in listY)
+                {
 
+                }
+            }
+            return result;
+        }
 
-            }
-                return result;
-            }
-
-            public Matematic(double epsilun)
-            {
-                Epsilun = epsilun;
-            }
+        public Matematic(double epsilun)
+        {
+            Epsilun = epsilun;
         }
     }
+}
