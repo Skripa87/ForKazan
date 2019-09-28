@@ -142,6 +142,7 @@
     <Compile Include="Models\FtpDataReader.cs" />
     <Compile Include="Models\CurrentBusPoint.cs" />
     <Compile Include="Models\IntermediatePointsForBuilding.cs" />
+    <Compile Include="Models\Matematic.cs" />
     <Compile Include="Models\XLWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

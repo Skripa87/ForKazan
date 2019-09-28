@@ -21,6 +21,7 @@ namespace ForKazan.Models
             var request = new WebClient();
             string url = FtpPath + fileName;
             request.Credentials = new NetworkCredential(UserName, Password);
+
             try
             {
                 byte[] newFileData = request.DownloadData(url);
@@ -95,7 +96,7 @@ namespace ForKazan.Models
                 var busRoute = new BusRoute(numberBusRoute, currentBusPoints.FindAll(c => numberBusRoute.Equals(c.Marsh)));
                 busRoutes.Add(busRoute);
                 currentBusPoints.RemoveAll(c => numberBusRoute.Equals(c.Marsh));
-            }
+            }            
             return busRoutes;
         }
 
