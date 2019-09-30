@@ -113,10 +113,10 @@ namespace ForKazan.Models
             {
                 var numberBusRoute = busRoute.NumberBusRoute;
                 var findingX = new List<double>();
-                var listX = busRoute.IntermediatePointsForBuilding
+                var listX = busRoute.IntermediatePoints
                                     .Select(s => s.Latitude)
                                     .ToList();
-                var listY = busRoute.IntermediatePointsForBuilding
+                var listY = busRoute.IntermediatePoints
                                     .Select(s => s.Longitude)
                                     .ToList();
                 var matrixA = CreateMatrixA(listX);

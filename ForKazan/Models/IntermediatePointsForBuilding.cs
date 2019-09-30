@@ -11,7 +11,7 @@ namespace ForKazan.Models
         public int GarageNumber { get; set; }
         public int Graphic { get; set; }
         public int Smena { get; set; }
-        public double Azimut { get; set; }
+        public int Azimut { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public double Speed { get; set; }
@@ -30,11 +30,9 @@ namespace ForKazan.Models
             Smena = int.TryParse(smena, out var smenaNum)
                   ? smenaNum
                   : -1;
-            Azimut = double.TryParse(azimuth, out var azimuthNum)
+            Azimut = int.TryParse(azimuth, out var azimuthNum)
                      ? azimuthNum
-                     : (double.TryParse(azimuth.Replace(',', '.'), out var azimuthIfNotPoint)
-                       ? azimuthIfNotPoint
-                       : -1);
+                     : -1;
             Latitude = double.TryParse(latitude, out var latnumber)
                      ? latnumber
                      : (double.TryParse(latitude.Replace(',','.'),out var latnumberIfNotPoint) 

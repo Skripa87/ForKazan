@@ -96,7 +96,7 @@ namespace ForKazan.Models
                 var busRoute = new BusRoute(numberBusRoute, currentBusPoints.FindAll(c => numberBusRoute.Equals(c.Marsh)));
                 busRoutes.Add(busRoute);
                 currentBusPoints.RemoveAll(c => numberBusRoute.Equals(c.Marsh));
-            }            
+            }
             return busRoutes;
         }
 
@@ -132,6 +132,12 @@ namespace ForKazan.Models
                     }
                 }
                 targetDate = targetDate.AddMinutes(1);
+            }
+            var contextManager = new ContextManager();
+            var busStops = contextManager.GetBusStops();
+            foreach (var item in busRoutes)
+            {
+                item.InsertBusStops(busStops);
             }
             return busRoutes;
         }
