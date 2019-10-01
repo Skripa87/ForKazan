@@ -12,6 +12,12 @@ namespace ForKazan.Models
         public List<BusStop> BusStops {get;set;}
         public List<IntermediatePoint> IntermediatePoints { get; set; }
 
+        public BusRoute()
+        {
+            IntermediatePoints = new List<IntermediatePoint>();
+            BusStops = new List<BusStop>();
+        }
+
         public BusRoute(string numberBusRoute, List<CurrentBusPoint> currentBusPoints)
         {
             Id = Guid.NewGuid()
@@ -34,8 +40,7 @@ namespace ForKazan.Models
             {
                 if (intermediatePoints.Count == 0) break;
                 var currentElement = intermediatePoints.ElementAt(i);
-                intermediatePoints.RemoveAll(p => (6371 * Math.Acos(Math.Sin(p.Latitude)*Math.Sin(currentElement.Latitude) + 
-                                                          Math.Cos(p.Latitude)*Math.Cos(currentElement.Latitude)*Math.Cos(p.Longitude - currentElement.Longitude))) <= 1);
+                intermediatePoints.RemoveAll(p => Matematic.GaversinusMethod(p.Latitude,currentElement.Latitude,p.Longitude,currentElement.Longitude) <= 1);
                 i++;
             } while (i < intermediatePoints.Count);            
             return intermediatePoints;
@@ -50,8 +55,7 @@ namespace ForKazan.Models
 
         public void InsertBusStops(List<BusStop> busStops)
         {
-            BusStops = busStops.FindAll(b => IntermediatePoints.Any(i => (6371*Math.Acos(Math.Sin(i.Latitude)*Math.Sin(b.Latitude) 
-                                                                             + Math.Cos(i.Latitude)*Math.Cos(b.Latitude)*Math.Cos(i.Longitude - b.Longitude)))<=1));
+            BusStops = busStops.FindAll(b => IntermediatePoints.Any(i => Matematic.GaversinusMethod(i.Latitude,b.Latitude,i.Longitude,b.Longitude)<=1));
         }
     }
 }

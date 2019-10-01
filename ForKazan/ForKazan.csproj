@@ -142,10 +142,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BusRoute.cs" />
-    <Compile Include="BusStop.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="C__MigrationHistory.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +156,7 @@
     <Compile Include="Models\CurrentBusPoint.cs" />
     <Compile Include="Models\IntermediatePoint.cs" />
     <Compile Include="Models\IntermediatePointsForBuilding.cs" />
+    <Compile Include="Models\MapPoint.cs" />
     <Compile Include="Models\Matematic.cs" />
     <Compile Include="Models\XLWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

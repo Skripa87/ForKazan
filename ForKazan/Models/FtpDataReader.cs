@@ -34,11 +34,10 @@ namespace ForKazan.Models
             return result;
         }
 
-        private List<BusRoute> GetBusRoutes(string fileName)
+        private List<CurrentBusPoint> GetBusRoutes(string fileName)
         {
             StringReader reader = null;
             var currentBusPoints = new List<CurrentBusPoint>();
-            var busRoutes = new List<BusRoute>();
             try
             {
                 reader = new StringReader(ReadFileToString(fileName));
@@ -88,21 +87,12 @@ namespace ForKazan.Models
             {
                 return null;
             }
-            while (currentBusPoints.Count > 0)
-            {
-                var numberBusRoute = currentBusPoints?.FirstOrDefault()
-                                                     ?.Marsh
-                                                     ?? "-1";
-                var busRoute = new BusRoute(numberBusRoute, currentBusPoints.FindAll(c => numberBusRoute.Equals(c.Marsh)));
-                busRoutes.Add(busRoute);
-                currentBusPoints.RemoveAll(c => numberBusRoute.Equals(c.Marsh));
-            }
-            return busRoutes;
+            return currentBusPoints;
         }
 
-        public List<BusRoute> CreateBusRoutes()
+        private Dictionary<string,Dictionary<string,List<MapPoint>>> CreatePreBusRoutes()
         {
-            var busRoutes = new List<BusRoute>();
+            var result = new Dictionary<string, Dictionary<string, List<MapPoint>>>();
             var targetDate = DateTime.Now
                                      .AddDays(-1)
                                      .AddHours(-1 * DateTime.Now.Hour)
@@ -118,28 +108,10 @@ namespace ForKazan.Models
                                     + targetDate.ToString("dd") + "_"
                                     + targetDate.ToString("HH") + "_"
                                     + targetDate.ToString("mm") + ".xml";
-                var busRoutesBuffer = GetBusRoutes(fileName) ?? new List<BusRoute>();
-                foreach(var busRouteBuffer in busRoutesBuffer)
-                {
-                    if (busRoutes.Select(b => b.NumberBusRoute).Contains(busRouteBuffer.NumberBusRoute))
-                    {
-                        busRoutes?.Find(b => b.NumberBusRoute.Equals(busRouteBuffer.NumberBusRoute))?
-                                  .InsertBusRoute(busRouteBuffer);
-                    }
-                    else
-                    {
-                        busRoutes.Add(busRouteBuffer);
-                    }
-                }
-                targetDate = targetDate.AddMinutes(1);
+                var 
+                targetDate.AddMinutes(1);
             }
-            var contextManager = new ContextManager();
-            var busStops = contextManager.GetBusStops();
-            foreach (var item in busRoutes)
-            {
-                item.InsertBusStops(busStops);
-            }
-            return busRoutes;
+            return result;
         }
 
         public FtpDataReader(string ftpPath, string user, string password)
