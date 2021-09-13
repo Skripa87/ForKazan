@@ -27,7 +27,7 @@ namespace ForKazan.Models
                 byte[] newFileData = request.DownloadData(url);
                 result = System.Text.Encoding.UTF8.GetString(newFileData);
             }
-            catch (Exception ex)
+            catch
             {
                 result = null;
             }
@@ -42,7 +42,7 @@ namespace ForKazan.Models
             {
                 reader = new StringReader(ReadFileToString(fileName));
             }
-            catch (Exception ex)
+            catch 
             {
                 return null;
             }
@@ -51,7 +51,7 @@ namespace ForKazan.Models
             {
                 Document.Load(reader);
             }
-            catch (Exception ex)
+            catch
             {
                 return null; 
             }
@@ -83,12 +83,54 @@ namespace ForKazan.Models
                     }                    
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
             return currentBusPoints;
         }
+
+        //public List<BusRoute> CreateBusRoutes()
+        //{
+        //    var busRoutes = new List<BusRoute>();
+        //    var targetDate = DateTime.Now
+        //                             .AddDays(-1)
+        //                             .AddHours(-1 * DateTime.Now.Hour)
+        //                             .AddMinutes(-1 * DateTime.Now.Minute)
+        //                             .AddSeconds(-1 * DateTime.Now.Second);
+        //    while (!DateTime.Now.Day.Equals(targetDate.Day))
+        //    {
+        //        var fileName = "//" + targetDate.ToString("yyyy") + "_"
+        //                            + targetDate.ToString("MM") + "_"
+        //                            + targetDate.ToString("dd") + "//"
+        //                            + "Otmetki_" + targetDate.ToString("yyyy") + "_"
+        //                            + targetDate.ToString("MM") + "_"
+        //                            + targetDate.ToString("dd") + "_"
+        //                            + targetDate.ToString("HH") + "_"
+        //                            + targetDate.ToString("mm") + ".xml";
+        //        var busRoutesBuffer = GetBusRoutes(fileName) ?? new List<BusRoute>();
+        //        foreach (var busRouteBuffer in busRoutesBuffer)
+        //        {
+        //            if (busRoutes.Select(b => b.NumberBusRoute).Contains(busRouteBuffer.NumberBusRoute))
+        //            {
+        //                busRoutes?.Find(b => b.NumberBusRoute.Equals(busRouteBuffer.NumberBusRoute))?
+        //                          .InsertBusRoute(busRouteBuffer);
+        //            }
+        //            else
+        //            {
+        //                busRoutes.Add(busRouteBuffer);
+        //            }
+        //        }
+        //        targetDate = targetDate.AddMinutes(1);
+        //    }
+        //    var contextManager = new ContextManager();
+        //    var busStops = contextManager.GetBusStops();
+        //    foreach (var item in busRoutes)
+        //    {
+        //        item.InsertBusStops(busStops);
+        //    }
+        //    return busRoutes;
+        //}
 
         private Dictionary<string,Dictionary<string,List<MapPoint>>> CreatePreBusRoutes()
         {
@@ -108,7 +150,7 @@ namespace ForKazan.Models
                                     + targetDate.ToString("dd") + "_"
                                     + targetDate.ToString("HH") + "_"
                                     + targetDate.ToString("mm") + ".xml";
-                var 
+                //var 
                 targetDate.AddMinutes(1);
             }
             return result;
